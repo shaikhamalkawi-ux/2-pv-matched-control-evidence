@@ -26,12 +26,19 @@ The legacy CKAN download route currently resolves to the new SPA shell and is no
 
 `Pmax_VTIF_Corr` is primary because the source itself supplies the corrected endpoint; the choice is fixed before outcome summaries. `tracer_pmax` is retained only as a raw-measurement sensitivity.
 
+## Frozen specimen-side and epoch scope
+Comparisons are performed only within the same physical **`nrel_id × Side`** unit. Front, rear, and mono measurements are never pooled or substituted for one another. If one side is absent at an endpoint, that specimen-side contrast is not calculable even when another side exists for the same physical module.
+
+The prespecified contrasts remain 2019→2024 (primary), 2019→2022, and 2022→2024 (secondary). Rows from 2018 and 2020 are retained in the source archive and lineage ledger but are excluded from these contrasts because those epochs were not prespecified. They are not used to fill a missing endpoint.
+
+Within a specimen-side-year-instrument state, repeated sweeps are summarized by the median only when they refer to the same documented measurement state. No averaging across different instruments is used to manufacture comparability.
+
 ## Instrument bridge fixed before outcomes
 A 2024 NREL PV Lifetime report documents that Spire 4600 has lower absolute accuracy than Spire 5600 and describes systematic offsets from temperature control, uniformity, spectral match, and aperture area. It further states that control modules were measured on both platforms to derive a correction factor and that Spire 4600 data plotted in that report were corrected for the simulator offset. Therefore:
 
 - exact same instrument/procedure remains the cleanest C2 admission route;
 - Spire 4600 ↔ Spire 5600 may be treated as source-documented bridged comparability **only when the DuraMAT record itself identifies/applies the relevant source correction state/factor**;
-- LACCS-MSR ↔ either Spire platform remains C1 unless a separate source-documented bridge is located;
+- LACSS-MSR ↔ either Spire platform remains C1 unless a separate source-documented bridge is located;
 - no bridge is inferred from common laboratory ownership alone.
 
 ## Accidental transport-probe exposure note
