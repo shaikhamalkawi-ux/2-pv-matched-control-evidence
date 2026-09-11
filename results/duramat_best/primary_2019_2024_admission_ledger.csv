@@ -1,0 +1,10 @@
+nrel_id,Side,primary_endpoint,primary_state,primary_reason,tracer_a,tracer_b,secondary_raw_tracer_pmax_delta_pct
+M1812-0011,front,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-1.0120608285264732
+M1812-0011,rear,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-1.3341239252890547
+M1812-0030,front,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-9.44688550012922
+M1812-0030,rear,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-6.844471081809999
+M1901-0001,mono,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-3.3574811925327297
+M1901-0004,mono,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-1.6803953871499244
+M1905-0005,front,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-2.430143945808627
+M1905-0022,front,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-3.7848720161058336
+M1905-0022,rear,Pmax_VTIF_Corr,C0,Pmax_VTIF_Corr is missing at both source epochs in the admitted resource; prespecified primary endpoint not calculable.,Spire 5600,Spire 5600,-2.1815154038301365
