@@ -1,0 +1,69 @@
+name: DuraMAT BEST outcome-blind schema inventory
+
+on:
+  push:
+    paths:
+      - '.github/workflows/duramat-best-schema.yml'
+      - 'protocols/DURAMAT_BEST_COMPARABILITY_FROZEN_v1.md'
+  workflow_dispatch:
+
+jobs:
+  schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download authoritative public CSV
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p external_work
+          curl -L --fail --retry 5 --retry-delay 3 \
+            -o external_work/2019-2024-iv-curves-blind.csv \
+            'https://datahub.duramat.org/dataset/7cdfed1b-7571-4b28-958e-c62e8f67139b/resource/4b1b201a-d866-4f52-ac6f-6989f7a376df/download/2019-2024-iv-curves-blind.csv'
+          sha256sum external_work/2019-2024-iv-curves-blind.csv | tee external_work/source_sha256.txt
+          wc -c external_work/2019-2024-iv-curves-blind.csv | tee external_work/source_bytes.txt
+
+      - name: Header and metadata-only inventory
+        shell: python
+        run: |
+          import csv, hashlib, json, re
+          from pathlib import Path
+          import pandas as pd
+
+          p=Path('external_work/2019-2024-iv-curves-blind.csv')
+          header=pd.read_csv(p,nrows=0).columns.tolist()
+          row_count=sum(1 for _ in open(p,'rb'))-1
+          forbidden=re.compile(r'(pmax|power|current|voltage|isc|voc|imp|vmp|eff|fill|ff|delta|degrad|change)',re.I)
+          metadata_candidates=[c for c in header if not forbidden.search(c) and re.search(r'(date|time|year|module|sample|specimen|serial|id|instrument|simulator|system|method|procedure|source|side|row|type|model|manufacturer)',c,re.I)]
+          df=pd.read_csv(p,usecols=metadata_candidates,dtype=str,low_memory=False) if metadata_candidates else pd.DataFrame()
+          unique={}
+          for c in metadata_candidates:
+              vals=sorted(v for v in df[c].dropna().astype(str).str.strip().unique().tolist() if v!='')
+              # categorical/schema inventory only; cap high-cardinality identifiers
+              unique[c]={'n_unique':len(vals),'examples':vals[:30] if len(vals)<=30 else vals[:10]}
+          h=hashlib.sha256(p.read_bytes()).hexdigest()
+          out={
+            'source_doi':'10.21948/2462712',
+            'resource_id':'4b1b201a-d866-4f52-ac6f-6989f7a376df',
+            'file':p.name,'bytes':p.stat().st_size,'sha256':h,'row_count':row_count,
+            'columns':header,'metadata_candidate_columns':metadata_candidates,
+            'metadata_unique_inventory':unique,
+            'outcome_columns_not_inspected':True
+          }
+          Path('external_work/schema_inventory.json').write_text(json.dumps(out,indent=2))
+          print(json.dumps(out,indent=2))
+
+      - name: Upload outcome-blind schema package
+        uses: actions/upload-artifact@v4
+        with:
+          name: duramat-best-schema-and-source
+          path: |
+            external_work/2019-2024-iv-curves-blind.csv
+            external_work/source_sha256.txt
+            external_work/source_bytes.txt
+            external_work/schema_inventory.json
+          if-no-files-found: error
+          retention-days: 30
