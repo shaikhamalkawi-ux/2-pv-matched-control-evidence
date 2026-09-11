@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated manuscript and this software repository."
+title: "PV Matched-Control Evidence"
+type: software
+authors:
+  - family-names: Malkawi
+    given-names: Ghassan
+    email: gmalkawi@hct.ac.ae
+year: 2026
+repository-code: "https://github.com/shaikhamalkawi-ux/2-pv-matched-control-evidence"
+keywords:
+  - photovoltaic
+  - metrology
+  - matched control
+  - bill of materials
+  - degradation
+  - uncertainty
+  - evidence gating
