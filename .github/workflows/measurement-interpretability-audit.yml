@@ -20,11 +20,12 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install numpy pandas
-      - name: Download public DuraMAT BEST source
-        run: python external_data/download_duramat_best.py
-      - name: Verify locked source hash
+      - name: Download public DuraMAT BEST source with locked-hash verification
         shell: bash
         run: |
+          set -euo pipefail
+          url='https://datahub.duramat.org/dataset/7cdfed1b-7571-4b28-958e-c62e8f67139b/resource/4b1b201a-d866-4f52-ac6f-6989f7a376df/download/2019-2024-iv-curves-blind.csv'
+          curl -k -L --fail --retry 5 --retry-delay 3 -o 2019-2024-iv-curves-blind.csv "$url"
           expected='e6e88f3948008fd2ac6bdf52007b7cee16ee334f78db07c633826188fe4e8713'
           actual="$(sha256sum 2019-2024-iv-curves-blind.csv | awk '{print $1}')"
           echo "expected=$expected"
@@ -33,6 +34,7 @@ jobs:
       - name: Run measurement audit
         run: python analysis/audit_measurement_interpretability.py --input 2019-2024-iv-curves-blind.csv
       - name: Upload audit results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: duramat-measurement-interpretability-audit
