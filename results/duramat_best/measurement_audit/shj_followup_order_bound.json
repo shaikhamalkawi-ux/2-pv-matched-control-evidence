@@ -1,0 +1,10 @@
+{
+  "pair": [
+    "SHJ-M1",
+    "SHJ-M5"
+  ],
+  "observed_log_gap": 0.0042053988130763345,
+  "max_equal_independent_abs_bound_each_for_guaranteed_order_strictly_less_than": 0.0021026994065381673,
+  "equiv_pct_change_each": 0.21049116292100045,
+  "assumption": "Worst-case independent signed combined control-drift plus differential-measurement bound of equal magnitude for each configuration."
+}
