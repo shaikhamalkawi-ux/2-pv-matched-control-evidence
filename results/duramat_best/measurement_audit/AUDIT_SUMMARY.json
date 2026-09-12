@@ -1,0 +1,14 @@
+{
+  "source_rows": 99,
+  "source_sha256": "e6e88f3948008fd2ac6bdf52007b7cee16ee334f78db07c633826188fe4e8713",
+  "corrected_endpoint_populated": 0,
+  "correction_factor_populated": 0,
+  "iv_rows_valid": 97,
+  "iv_rel_diff_pct_median": 0.006700729927005367,
+  "iv_rel_diff_pct_p95_abs": 0.28734304768063373,
+  "iv_rel_diff_pct_max_abs": 0.5688031249999985,
+  "year_instrument_side_groups": 84,
+  "groups_spanning_more_than_one_day": 4,
+  "max_group_span_days": 321.8638888888889,
+  "claim_boundary": "No degradation estimate; no corrected endpoint reconstruction; no causal instrument effect; conditional sensitivity only."
+}
